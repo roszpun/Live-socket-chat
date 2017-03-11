@@ -44,7 +44,7 @@ router.get('/get', function (req, res, next) {
             console.error(err);
             res.render(err);
         }
-        else { // if room exist look for messages
+        else { // return rooms
             res.json(db_rooms);
         }
     })

@@ -105,7 +105,7 @@ var chat = new Vue({
                 });
 
         },
-
+        // Updating rooms list
         get_rooms: function () {
             axios.get('/chat/get', { // hit the /rooms/get url to get room data
             }).then(function (response) { // on success
