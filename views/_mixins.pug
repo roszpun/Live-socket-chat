@@ -1,0 +1,28 @@
+mixin messages()
+    article.media(v-for="message in current_room_messages")
+        figure.media-left
+            .image.is-32x32
+                .user-avatar {{message.author.charAt(0)}}
+        .media-content
+            .content
+                p
+                    strong {{message.author}}
+                    br
+                    |{{message.body}}
+                    br
+                    small {{message.date}}
+
+
+mixin modal(name, title, click)
+    .modal(:class="{'is-active' : " + name + "}")
+        .modal-background
+        .modal-card
+            header.modal-card-head
+                p.modal-card-title=title
+                button.delete(@click="close_modal('" + name + "')")
+            section.modal-card-body
+                if block
+                    block
+            footer.modal-card-foot
+                a.button.is-success(@click!=click) Create
+                a.button(@click="close_modal('" + name + "')") Cancel

@@ -1,0 +1,51 @@
+extends layout
+include _mixins
+block content
+   #chat.chat-wrapper
+       .columns
+           .column.is-3
+               aside.menu
+                   .media-content
+                       p.title.is-4 {{user_name}}
+                       p.subtitle.is-6 @{{user_id}}
+                       p.menu-label  Public chat rooms
+                       ul.menu-list.rooms
+                           -var i = 0
+                           each room in rooms
+                               li
+                                   a(@click="change_room('" + room.id + "')", :class="{'is-active' : current_room_index =='" + room.id + "'}")
+                                        =room.name
+                           li
+                               a.is-active.create-new(@click="new_room_modal = true, display_errors = false") Create new
+                                   span.create-icon.is-pulled-right.icon.is-small: i.fa.fa-plus
+
+           .column.is-9
+               .container
+                   .notification(v-if="current_room_data != ''")
+                       |Current room: &nbsp;
+                       strong(v-text="current_room_data.name")
+                       .title.is-6(v-text="current_room_data.description")
+                   .notification(v-if="current_room_data == ''")
+                       | Please select chat room to start chatting
+               .chat-messages-wrapper(v-if="current_room_data != ''")
+                        +messages()
+               .chat-typer(v-if="current_room_data != ''")
+                   article.media
+                       figure.media-left
+                           .image.is-32x32
+                               .user-avatar {{user_name.charAt(0)}}
+                       .media-content
+                           .span.help.is-danger(v-show="has_errors != '' && display_errors")
+                               | {{error_message}}
+                           p.control
+                               textarea.textarea(placeholder='Your message' v-model="new_message", @keydown.enter="send_message")
+                           p.control
+                               button.button(@click="send_message") Send
+       +modal('new_room_modal', 'Create new chat room', 'create_room')
+               .control
+                   input.input(type='text', placeholder='Chat room name', :class="{'is-danger' : has_errors != '' && display_errors}" v-model="new_chat_room_title")
+                   .span.help.is-danger(v-show="has_errors != '' && display_errors")
+                       |{{error_message}}
+               .control
+                   textarea.textarea(placeholder='Chat room description' v-model="new_chat_room_description")
+   script(src="/vue/chat.js")
