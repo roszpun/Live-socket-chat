@@ -8,5 +8,5 @@ block content
         |{{has_errors}}
       input.input(type="text" name="login", @keyup.enter="login" v-model="user_login", :class="{'is-danger' : has_errors != '' && display_errors}" placeholder="Your login")
     .control
-      button.button.is-primary(@click="login", :class="{'is-loading' : loading_status}") Login
+      button.button.is-primary(@click="login") Login
   script(src="/vue/login.js")

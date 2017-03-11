@@ -11,6 +11,7 @@ var index = require('./router/index');
 var rooms = require('./router/rooms');
 var messages = require('./router/messages');
 var chat = require('./router/chat');
+var users = require('./router/users');
 
 var app = express();
 
@@ -36,6 +37,8 @@ app.use('/', index);
 app.use('/chat', chat);
 app.use('/rooms', rooms);
 app.use('/messages', messages);
+app.use('/users', users);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

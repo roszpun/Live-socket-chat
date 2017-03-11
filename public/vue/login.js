@@ -14,6 +14,7 @@ function guid() {
             .toString(16)
             .substring(1);
     }
+
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4();
 }
 
@@ -70,21 +71,35 @@ var login_form = new Vue({
     // ================================================
 
     methods: {
+        save_name: function () {
+            axios.post('/users/save', {
+                // params
+                name: login_form.user_login // login
+            }).then(function (response) {
+                    if (response.data == "Username taken") { // if user is taken
+                        login_form.has_errors = response.data; // display erros
+                        login_form.display_errors = true;
+                    } else if (response.data.info == "User saved") {// if user saved
+                        sessionStorage.setItem('mandatory_chat_user_id', response.data.id);//set session storage
+                        sessionStorage.setItem('mandatory_chat_user', login_form.user_login); // set session storage
+                        login_form.redirect_to_chat(); // redirect to chat
+                    }
+                })
+        },
+
         // Login method. If user is not logged he will be added to local storage
         login: function () {
             //checking if user has username
             if (this.user_login != '') {
-                sessionStorage.setItem('mandatory_chat_user', this.user_login);
-                sessionStorage.setItem('mandatory_chat_user_id', guid());
-               this.redirect_to_chat();
-            }else{
+                login_form.save_name();
+            } else {
                 // if not display error
                 this.display_errors = true;
             }
         },
         // Redirect method checks if user is logged nad redirects if its necessery to chat
         redirect_to_chat: function () {
-            if(sessionStorage.getItem("mandatory_chat_user") && sessionStorage.getItem("mandatory_chat_user_id")){
+            if (sessionStorage.getItem("mandatory_chat_user") && sessionStorage.getItem("mandatory_chat_user_id")) {
                 document.location.href = "/chat";
             }
         }

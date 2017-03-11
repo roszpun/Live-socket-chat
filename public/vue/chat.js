@@ -134,6 +134,7 @@ var chat = new Vue({
                 // params
                 body: this.new_message, // message text
                 author: this.user_name, // message author
+                user_id: this.user_id,// message author id
                 room_id: this.current_room_index // message assigned to room
             })
                 .then(function (response) {
