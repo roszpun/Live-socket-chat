@@ -12,8 +12,6 @@ router.get('/', function (req, res, next) {
     var rooms = mongoose.model('Room');
     var messages = mongoose.model('Message');
 
-
-
     rooms.find({}, function (err, db_rooms) { // find rooms
         if (err) { // throw error if error occurs
             console.error(err);
@@ -36,5 +34,21 @@ router.get('/', function (req, res, next) {
         }
     })
 });
+
+
+
+router.get('/get', function (req, res, next) {
+    var rooms = mongoose.model('Room');
+    rooms.find({}, function (err, db_rooms) { // find rooms
+        if (err) { // throw error if error occurs
+            console.error(err);
+            res.render(err);
+        }
+        else { // if room exist look for messages
+            res.json(db_rooms);
+        }
+    })
+});
+
 
 module.exports = router;

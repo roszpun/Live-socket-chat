@@ -10,11 +10,9 @@ block content
                        p.subtitle.is-6 @{{user_id}}
                        p.menu-label  Public chat rooms
                        ul.menu-list.rooms
-                           -var i = 0
-                           each room in rooms
-                               li
-                                   a(@click="change_room('" + room.id + "')", :class="{'is-active' : current_room_index =='" + room.id + "'}")
-                                        =room.name
+                           li(v-for="room of rooms")
+                               a(@click="change_room(room._id)", :class="{'is-active' : current_room_index == room._id}")
+                                    |{{room.name}}
                            li
                                a.is-active.create-new(@click="new_room_modal = true, display_errors = false") Create new
                                    span.create-icon.is-pulled-right.icon.is-small: i.fa.fa-plus

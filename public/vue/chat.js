@@ -8,6 +8,7 @@ var chat = new Vue({
     el: '#chat', // root
     // data used
     data: {
+        rooms: {},
         new_chat_room_title: '', // new chat room title in case of creation one
         new_chat_room_description: '', // its description
         current_room_messages: {}, // current room messages object stores all data from messages request
@@ -16,11 +17,13 @@ var chat = new Vue({
     },
     // while created
     mounted: function () {
+        this.get_rooms();
         // refresh room each 5 seconds getting new data for chat room
-        window.setInterval(function(){
-           if(chat.current_room_index != ''){ // if chat is selected
-               chat.get_data(chat.current_room_index); // update data
-           }
+        window.setInterval(function () {
+            chat.get_rooms();
+            if (chat.current_room_index != '') { // if chat is selected
+                chat.get_data(chat.current_room_index); // update data
+            }
         }, 5000); // each 5000ms
 
 
@@ -81,7 +84,7 @@ var chat = new Vue({
             if (this.new_chat_room_title == '') { // if user try to create room without name
                 this.display_errors = true; // throw error
                 return; // end
-            }else{
+            } else {
                 // hide if there was an error and it's not there anymore
                 this.display_errors = false;
             }
@@ -102,6 +105,16 @@ var chat = new Vue({
                 });
 
         },
+
+        get_rooms: function () {
+            axios.get('/chat/get', { // hit the /rooms/get url to get room data
+            }).then(function (response) { // on success
+                chat.rooms = response.data; // update rooms
+            }).catch(function (error) {// if error console the error
+                console.log(error);
+            });
+        },
+
         // change room method
         change_room: function (id) {
             this.current_room_index = id; // changing room id saved in property

@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 // Including routers
 
 var index = require('./router/index');
-var users = require('./router/users');
 var rooms = require('./router/rooms');
 var messages = require('./router/messages');
 var chat = require('./router/chat');
@@ -35,7 +34,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/chat', chat);
-app.use('/users', users);
 app.use('/rooms', rooms);
 app.use('/messages', messages);
 
