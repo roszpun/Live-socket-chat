@@ -24,7 +24,7 @@ router.get('/', function (req, res, next) {
                     res.render(err);
                 }
                 else { // else return rooms and messages to view
-                    res.render('chat', {
+                    res.render('chatroom', {
                         title: 'Chat',
                         rooms: db_rooms,
                         messages: db_messages

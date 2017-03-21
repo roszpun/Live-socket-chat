@@ -7,11 +7,11 @@ var bodyParser = require('body-parser');
 
 // Including routers
 
-var index = require('./router/index');
-var rooms = require('./router/rooms');
-var messages = require('./router/messages');
-var chat = require('./router/chat');
-var users = require('./router/users');
+var index = require('./routes/index');
+var rooms = require('./routes/rooms');
+var messages = require('./routes/messages');
+var chat = require('./routes/chat');
+var users = require('./routes/users');
 
 var app = express();
 

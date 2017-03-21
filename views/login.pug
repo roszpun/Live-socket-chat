@@ -9,6 +9,6 @@ block content
             input.c-field(type="text" name="login", @keyup.enter="login" v-model="user_login", :class="{'is-danger' : has_errors != '' && display_errors}" placeholder="Your login")
             .c-hint
               .span.help.is-danger(v-show="has_errors != '' && display_errors")
-                | {{has_errors}}
+                |{{has_errors}}
         button.c-button.c-button--brand.c-button--block(@click="login") Login
   script(src="/vue/login.js")

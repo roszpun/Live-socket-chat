@@ -5,11 +5,11 @@ block content
        .o-grid
            .o-grid__cell.o-grid__cell--width-75
                .c-alert.c-alert--error(v-if="current_room_data != ''")
-                   | Current room: &nbsp;
+                   |Your room: &nbsp;
                    strong(v-text="current_room_data.name")
                        .title.is-6(v-text="current_room_data.description")
                .c-alert.c-alert--error(v-if="current_room_data == ''")
-                   | Please select chat room to start chatting
+                   |Please select room
 
                #chat-messages-wrapper.chat-messages-wrapper(v-if="current_room_data != ''")
                    +messages()
