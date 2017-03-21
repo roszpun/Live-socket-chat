@@ -1,12 +1,14 @@
 extends layout
 
 block content
-  .login-panel#login
-    label.label.has-text-centered Choose your login
-    .control
-      .span.help.is-danger(v-show="has_errors != '' && display_errors")
-        |{{has_errors}}
-      input.input(type="text" name="login", @keyup.enter="login" v-model="user_login", :class="{'is-danger' : has_errors != '' && display_errors}" placeholder="Your login")
-    .control
-      button.button.is-primary(@click="login") Login
+  main#login.u-center-block
+    .u-center-block__content
+        label.c-label Choose your login
+        .c-input-group.c-input-group--stacked
+          .o-field
+            input.c-field(type="text" name="login", @keyup.enter="login" v-model="user_login", :class="{'is-danger' : has_errors != '' && display_errors}" placeholder="Your login")
+            .c-hint
+              .span.help.is-danger(v-show="has_errors != '' && display_errors")
+                | {{has_errors}}
+        button.c-button.c-button--brand.c-button--block(@click="login") Login
   script(src="/vue/login.js")

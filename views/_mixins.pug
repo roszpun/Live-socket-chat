@@ -1,28 +1,21 @@
 mixin messages()
-    article.media(v-for="message in current_room_messages")
-        figure.media-left
-            .image.is-32x32
-                .user-avatar {{message.author.charAt(0)}}
-        .media-content
-            .content
-                p
-                    strong {{message.author}}
-                    br
-                    |{{message.body}}
-                    br
-                    small {{message.date}}
+    .message(v-for="message in current_room_messages")
+        .c-alert(:class="{'his-message c-alert--info' : message.user_id != user_id}")
+            .message-author {{message.author}}
+            br
+            |{{message.body}}
 
 
 mixin modal(name, title, click)
-    .modal(:class="{'is-active' : " + name + "}")
-        .modal-background
-        .modal-card
-            header.modal-card-head
-                p.modal-card-title=title
-                button.delete(@click="close_modal('" + name + "')")
-            section.modal-card-body
+    .c-overlay(v-show="new_room_modal")
+    .o-modal(v-show="new_room_modal")
+        .c-card
+            header.c-card__header
+                button.c-button.c-button--close(type='button', @click="close_modal('" + name + "')") &times;
+                h2.c-heading=title
+            .c-card__body
                 if block
                     block
-            footer.modal-card-foot
-                a.button.is-success(@click!=click) Create
-                a.button(@click="close_modal('" + name + "')") Cancel
+            footer.c-card__footer
+                button.c-button.c-button--success(type='button', @click!=click) Create
+                button.c-button.c-button--error(type='button', @click="close_modal('" + name + "')") Cancel

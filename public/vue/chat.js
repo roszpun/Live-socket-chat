@@ -65,7 +65,10 @@ var chat = new Vue({
             axios.get('/rooms/' + this.current_room_index, { // hit the /rooms/:id url to get room data
             }).then(function (response) { // on success
                 chat.current_room_data = response.data.room[0]; // assign response data to data property
-                chat.current_room_messages = response.data.messages; // assign messages to current room messages object
+                chat.current_room_messages = response.data.messages;
+                setTimeout(function () {
+                    $('#chat-messages-wrapper').scrollTop($('#chat-messages-wrapper')[0].scrollHeight);
+                }, 100)
             }).catch(function (error) {// if error console the error
                 console.log(error);
             });

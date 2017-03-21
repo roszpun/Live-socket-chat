@@ -1,23 +1,47 @@
 
-
-/// Basic styling which I used to support Bulma's css
-
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed')
 body, html
-    background-color: #00d1b2
+    background-color: #f44336
+    font-family: 'Roboto Condensed', sans-serif
 
-.login-panel
-  background: #fff
+.u-center-block__content
+  width: 100%
+.c-hint
+  margin-top: 6px
+  color: red
+  display: block !important
+  opacity: 1 !important
+  color: #fff !important
+
+.u-center-block
   width: 300px
   height: auto
   position: absolute
   top: 50%
   left: 50%
+  color: #fff
   transform: translate(-50%, -50%)
-  border-radius: 20px
   padding: 25px
   button
-    margin: 0 auto
+    margin: 30px auto 0 auto
     display: block
+.send-message
+  margin-top: 10px
+
+.message-author
+  font-size: 10px
+
+
+.his-message
+  width: 100%
+  float: right
+.message
+  > div
+      max-width: 90%
+  &:after
+    display: table
+    content: ''
+    clear: both
 
 .menu
   border-right: 1px solid #f8f8f8
@@ -26,10 +50,13 @@ body, html
     margin-right: 30px
   li
     list-style: none
+    margin-top: 10px
+    border-bottom: 1px solid #f1f1f1
+    padding: 5px
 
-.create-icon
-  position: relative
-  top: 2px
+.create-room
+  display: block
+  margin-top: 5px
 
 .chat-wrapper
   background: #fff
@@ -81,8 +108,27 @@ body, html
   font-size: 13px
   color: #fff
   text-transform: uppercase
-  background: #23d160
+  background: #f44336
 
 .chat-typer
   background: #f8f8f8
   padding: 10px
+  textarea
+    margin-bottom: 25px
+  .control
+    & + .c-hint
+      margin-top: -18px !important
+
+.o-modal
+  width: 350px !important
+.c-card
+  .c-field
+    margin-top: 30px
+
+.c-card__footer
+  button
+    margin-right: 15px
+
+.chat-wrapper
+  .c-hint
+    color: red !important
