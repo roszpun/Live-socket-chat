@@ -1,4 +1,4 @@
-## Mandatory chat assignment for frameworks classes with mongodb, EJS and Vue.js
+## Socket chat with mongodb, EJS and Vue.js
 
 ### Dependencies
 * [node.js](https://nodejs.org/en/download/)
